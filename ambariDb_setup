@@ -1,11 +1,11 @@
 mysql user and db creation
 
 CREATE USER 'ambari'@'%' IDENTIFIED BY 'Ambaridb';
-GRANT ALL PRIVILEGES ON . TO 'ambari'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'%';
 CREATE USER 'ambari'@'localhost' IDENTIFIED BY 'Ambaridb';
-GRANT ALL PRIVILEGES ON . TO 'ambari'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'localhost';
 CREATE USER 'ambari'@'ip-172-31-12-218.us-east-2.compute.internal' IDENTIFIED BY 'Ambaridb';
-GRANT ALL PRIVILEGES ON . TO 'ambari'@'ip-172-31-12-218.us-east-2.compute.internal';
+GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'ip-172-31-12-218.us-east-2.compute.internal';
 FLUSH PRIVILEGES;
 mysql -u ambari -p
 CREATE DATABASE ambari;
