@@ -30,6 +30,9 @@
     yum:
       name: ntp
       state: latest
+    yum:
+      name: libtirpc-devel
+      state: present
   - name: selinux disabling
     selinux:
       state: disabled
