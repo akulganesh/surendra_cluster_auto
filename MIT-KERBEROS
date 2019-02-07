@@ -1,0 +1,17 @@
+THIS FILE GUIDES THE MIT-KERBEROS SETUP
+To install packages for a Kerberos server:
+yum install krb5-server krb5-libs krb5-auth-dialog
+To install packages for a Kerberos client
+yum install krb5-workstation krb5-libs krb5-auth-dialog
+Edit the /etc/krb5.conf and /var/kerberos/krb5kdc/kdc.conf
+ replacing instances of EXAMPLE.COM and example.com  
+ example HADOOP.COM AND hadoop.com
+ Create the database using the kdb5_util utility.
+/usr/sbin/kdb5_util create -s
+Edit the /var/kerberos/krb5kdc/kadm5.acl
+*/admin@HADOOP.COM *
+Create the first principal using kadmin.local at the KDC terminal:
+/usr/sbin/kadmin.local -q "addprinc username/admin"
+Start Kerberos using the following commands:
+/sbin/service krb5kdc start
+/sbin/service kadmin start
