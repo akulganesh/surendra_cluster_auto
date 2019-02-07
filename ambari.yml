@@ -85,12 +85,14 @@
       state: latest
   - name: mysql-connector setup to ambari-server
     command: ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
-  - name: installing the Mysql-server using shell script
-    command: sh /root/mysql.sh
-- hosts: all
+- hosts: client
   tasks:
   - name: On Client nodes installing ambari-agent
     yum:
       name: ambari-agent
       state: latest
+- hosts: master
+  tasks:
+  - name: installing the Mysql-server using shell script
+    command: sh /root/mysql.sh
 ...
