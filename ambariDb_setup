@@ -11,3 +11,15 @@ mysql -u ambari -p
 CREATE DATABASE ambari;
 USE ambari;
 SOURCE /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql
+
+
+hive--server-DB setup
+
+CREATE USER 'hive'@'%' IDENTIFIED BY 'Hiveserverdb';
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%';
+CREATE USER 'hive'@'localhost' IDENTIFIED BY 'Hiveserverdb';
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'localhost';
+CREATE USER 'hive'@'ip-172-31-12-218.us-east-2.compute.internal' IDENTIFIED BY 'Hiveserverdb';
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'ip-172-31-12-218.us-east-2.compute.internal';
+FLUSH PRIVILEGES;
+
