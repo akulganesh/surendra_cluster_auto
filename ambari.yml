@@ -17,6 +17,10 @@
       name: httpd
       state: started
       enabled: yes
+  - name: firewalld install
+    yum:
+      name: firewalld
+      state: present
   - name: stop  service firewalld ,disable when os reboot
     service:
       name: firewalld
@@ -30,9 +34,6 @@
     yum:
       name: ntp
       state: latest
-    yum:
-      name: libtirpc-devel
-      state: present
   - name: selinux disabling
     selinux:
       state: disabled
@@ -71,8 +72,9 @@
     get_url:
       url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0/ambari.repo
       dest: /etc/yum.repos.d/
-  - name: updating yum repolist
-    shell: sh /root/ambari.sh
+  - name: Upgrade all packages (yum)
+    yum: name=* state=latest
+    when: ansible_os_family == "RedHat"
 - hosts: master
   tasks:
   - name: Ambari-server installing on master node AND MYSQL INSTALLATION
