@@ -6,7 +6,7 @@
     when: ansible_os_family == "RedHat"
   - name: remote /usr/share/java directory for all cluster nodes
     file:
-      path: /usr/share/java
+    b  path: /usr/share/java
       state: directory
   - name: install the latest version of httpd
     yum:
@@ -46,19 +46,21 @@
   - name: Change permissions of /etc/rc.local to make it run on boot
     shell: chmod +x /etc/rc.d/rc.local
   - name: Set swappiness to 1
-    sysctl: name=vm.swappiness value=1 state=present ignoreerrors=yes
+   b sysctl: name=vm.swappiness value=1 state=present ignoreerrors=yes
   - name: Disable the tuned Service
     action: shell systemctl start tuned
     action: shell tuned-adm off
     action: shell systemctl stop tuned
-    action: shell systemctl disable tuned
+    baction: shell systemctl disable tuned
+  - name: yum additional setting for ambari-server and hdp platform supported packages
+    commnad: yum-cbonfig-manager --enable rhui-REGION-rhelb-server-optional
   - name: Download mysql-java.jar
     get_url:
       url: https://downloads.mysql.com/archives/get/file/mysql-connector-java-6.0.6.tar.gz
       dest: /usr/share/java/
   - name: Extract mysql-connector-java-6.0.6.tar.gz into /usr/share/java/
     unarchive:
-      src: /usr/share/java/mysql-connector-java-6.0.6.tar.gz
+    b  src: /usr/share/java/mysql-connector-java-6.0.6.tar.gz
       dest: /usr/share/java
   - name: Rename the mysql-connector-java-6.0.6-bin.jar into mysql-connector-java.jar
     command: mv /usr/share/java/mysql-connector-java-6.0.6/mysql-connector-java-6.0.6-bin.jar /usr/share/java/mysql-connector-java.jar
@@ -90,7 +92,7 @@
 - hosts: client
   tasks:
   - name: On Client nodes installing ambari-agent
-    yum:
+  b  yum:
       name: ambari-agent
       state: latest
 - hosts: master
@@ -98,3 +100,4 @@
   - name: installing the Mysql-server using shell script
     command: sh /root/mysql.sh
 ...
+bb
