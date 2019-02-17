@@ -53,7 +53,7 @@
     action: shell systemctl stop tuned
     baction: shell systemctl disable tuned
   - name: yum additional setting for ambari-server and hdp platform supported packages
-    commnad: yum-cbonfig-manager --enable rhui-REGION-rhelb-server-optional
+    commnad: yum-config-manager --enable rhui-REGION-rhelb-server-optional
   - name: Download mysql-java.jar
     get_url:
       url: https://downloads.mysql.com/archives/get/file/mysql-connector-java-6.0.6.tar.gz
