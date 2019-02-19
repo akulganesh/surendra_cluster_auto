@@ -30,18 +30,21 @@
     get_url:
       url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0/ambari-2.7.3.0-centos7.tar.gz
       dest: /var/www/html/AMBARI/
+      owner: root
+      group: root
+      mode: 0777
   - name: unarchive the ambari-2.7.3.0-centos7.tar.gz file
     unarchive:
       src: /var/www/html/AMBARI/ambari-2.7.3.0-centos7.tar.gz
       dest: /var/www/html/AMBARI/
       owner: root
+      group: root
       remote_src: yes
   - name: Downloding ambari.repo file from internet
     get_url:
       url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0/ambari.repo
       dest: /etc/yum.repos.d/
   - name: Replacing master.hadoop.com local machine fqdn insted of public fqdn
- - name: Replacing master.hadoop.com local machine fqdn insted of public fqdn
     replace:
       path: /etc/yum.repos.d/ambari.repo
       regexp: 'http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.3.0'
@@ -50,20 +53,29 @@
     get_url:
       url: http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.1.0.0/HDP-3.1.0.0-centos7-rpm.tar.gz
       dest: /var/www/html/HDP/
+      owner: root
+      group: root
+      mode: 0777
   - name: Unarchive HDP-3.1.0.0-centos7-rpm.tar.gz file
     unarchive:
       src: /var/www/html/HDP/HDP-3.1.0.0-centos7-rpm.tar.gz
       dest: /var/www/html/HDP/
       owner: root
+      group: root
       remote_src: yes
   - name: Downloading tarballs from internet hdp-util
     get_url:
       url: http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.22/repos/centos7/HDP-UTILS-1.1.0.22-centos7.tar.gz
       dest: /var/www/html/HDP_UTIL
+      owner: root
+      group: root
+      mode: 0777
   - name: Unarchive the HDP-UTILS-1.1.0.22-centos7.tar.gz
     unarchive:
       src: /var/www/html/HDP_UTIL/HDP-UTILS-1.1.0.22-centos7.tar.gz
       dest: /var/www/html/HDP_UTIL/
+      owner: root
+      group: root
       remote_src: yes
   - name: Downloading the HDP repo from internt
     get_url:
@@ -73,19 +85,17 @@
     replace:
       path: /etc/yum.repos.d/hdp.repo
       regexp: 'http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.1.0.0'
-      replace: "http://master.hadoop.com/HDP/HDP/centos7/3.1.0.0-78/"
+      replace: "http://master.hadoop.com/HDP/HDP/centos7/3.1.0.0-78"
   - name: Replacing the hdp-util fqdn
     replace:
       path: /etc/yum.repos.d/hdp.repos
       regexp: 'http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.22/repos/centos7'
-      replace: "http://master.hadoop.com/HDP_UTILS/HDP-UTILS/centos7/1.1.0.22"
+      replace: http://master.hadoop.com/HDP_UTILS/HDP-UTILS/centos7/1.1.0.22
   - name: Module 4 Downloading the hdp-gpl.repo file
     get_url:
       url: http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.0.0/hdp.gpl.repo
       dest: /etc/yum.repos.d/
   - name: Downloading the tarballs for HDP_GPL
-:
- - name: Downloading the tarballs for HDP_GPL
     get_url:
       url: http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.0.0/HDP-GPL-3.1.0.0-centos7-gpl.tar.gz
       dest: /var/www/html/HDP_GPL/
@@ -95,4 +105,3 @@
       regexp: 'http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.0.0'
       replace: "http://master.hadoop.com/HDP_GPL/HDP-GPL/centos7/3.1.0.0-78/"
 ...
-(END)
