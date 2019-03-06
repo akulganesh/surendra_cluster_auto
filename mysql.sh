@@ -7,5 +7,3 @@ yum install -y mysql-community-libs-compat-5.7.19-1.el7.x86_64.rpm
 yum install -y mysql-community-devel-5.7.19-1.el7.x86_64.rpm
 yum install -y mysql-community-client-5.7.19-1.el7.x86_64.rpm
 yum install -y mysql-community-server-5.7.19-1.el7.x86_64.rpm
-service mysqld start
-cat /var/log/mysql.log | grep temp
