@@ -6,7 +6,7 @@
     when: ansible_os_family == "RedHat"
   - name: remote /usr/share/java directory for all cluster nodes
     file:
-    b  path: /usr/share/java
+      path: /usr/share/java
       state: directory
   - name: install the latest version of httpd
     yum:
@@ -51,9 +51,7 @@
     action: shell systemctl start tuned
     action: shell tuned-adm off
     action: shell systemctl stop tuned
-    baction: shell systemctl disable tuned
-  - name: yum additional setting for ambari-server and hdp platform supported packages
-    commnad: yum-config-manager --enable rhui-REGION-rhelb-server-optional
+    action: shell systemctl disable tuned
   - name: Download mysql-java.jar
     get_url:
       url: https://downloads.mysql.com/archives/get/file/mysql-connector-java-6.0.6.tar.gz
@@ -79,7 +77,7 @@
     when: ansible_os_family == "RedHat"
 - hosts: master
   tasks:
-  - name: Ambari-server installing on master node AND MYSQL INSTALLATION
+  - name: Ambari-server installing on master node
     yum: 
       name: ambari-server
       state: latest
@@ -95,8 +93,4 @@
     yum:
       name: ambari-agent
       state: latest
-- hosts: master
-  tasks:
-  - name: installing the Mysql-server using shell script
-    command: sh /root/mysql.sh
 ...
